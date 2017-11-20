@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http  import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 
 from .forms import ContactForm
+from .forms import RegisterForm
 from .forms import LoginForm
 
 def home_page(request):
@@ -10,6 +11,8 @@ def home_page(request):
         "title":"Home Page!",
         "content":"Welcome to the Home Page!"
     }
+    if request.user.is_authenticated():
+        context[ "premiumContent" ]= "Yeaaaah"
     return render(request,"home.html",context)
 
 def about_page(request):
@@ -58,17 +61,25 @@ def login_page(request):
             login(request, user)
             # Redirect to a success page.
             #context['form'] = LoginForm()
-            return redirect("/login")
+            return redirect("/")
         else:
             # Return an 'invalid login' error message.
             print('Error')
     return render(request,"auth/login.html",context)
 
+User = get_user_model()
 def register_page(request):
-    form = LoginForm(request.POST or None)
-
+    form = RegisterForm(request.POST or None)
+    context = {
+        "form" : form
+    }
     if form.is_valid():
         print(form.cleaned_data)
-    return render(request,"auth/register.html",{})
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        email = form.cleaned_data.get("email")
+        newUser =  User.objects.create_user(username,email,password)
+        print(newUser)
+    return render(request,"auth/register.html",context)
 
 
