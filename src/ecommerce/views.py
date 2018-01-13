@@ -12,7 +12,7 @@ def home_page(request):
         "content":"Welcome to the Home Page!"
     }
     if request.user.is_authenticated():
-        context[ "premiumContent" ]= "Yeaaaah"
+        context[ "premiumContent" ]= "I am premium now :)"
     return render(request,"home.html",context)
 
 def about_page(request):

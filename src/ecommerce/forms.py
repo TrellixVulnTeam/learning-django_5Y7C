@@ -41,10 +41,28 @@ class LoginForm(forms.Form):
         password = forms.CharField(widget = forms.PasswordInput)
 
 class RegisterForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget = forms.PasswordInput)
-    password2 = forms.CharField(widget = forms.PasswordInput, label = 'Confirm Password')
-    email     = forms.CharField()
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={"class":"form-control",
+               "placeHolder":"Name",
+               "name":"fullName"
+               }))
+    password = forms.CharField(widget = forms.PasswordInput(
+        attrs={"class":"form-control",
+               "placeHolder":"Password",
+               "name":"password"
+               }
+    ))
+    password2 = forms.CharField(widget = forms.PasswordInput(
+        attrs={"class":"form-control",
+               "placeHolder":"Password",
+               "name":"password2"
+               }
+    ), label = 'Confirm Password')
+    email     = forms.EmailField( widget=forms.EmailInput(
+        attrs={"class":"form-control",
+               "placeHolder":"Email",
+               "name":"email"
+               }))
 
     def clean_username(self):
         username = self.cleaned_data.get('username')

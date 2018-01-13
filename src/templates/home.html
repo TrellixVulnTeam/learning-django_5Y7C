@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href= '{% static "css/main.css" %}' >
 </head>
 <body>
     <div class = "text-center">
@@ -17,12 +19,13 @@
     <div class="'container">
         <div class = 'row'>
             <div class = 'col'>
+                <img src = "{%static 'img/92683283.jpg' %}" class="img-fluid"/>
                 <p>{{content}}</p>
             </div>
         </div>
         <div class = 'row'>
             <div class = 'col'>
-                <h1>Premium Bitches</h1>
+                <h1>Log in and see this Premium Content</h1>
                 <p>{{premiumContent}}</p>
             </div>
         </div>
